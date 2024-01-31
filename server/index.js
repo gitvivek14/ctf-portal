@@ -11,7 +11,7 @@ require("./config/database").connect()
 app.get("/",(req,res)=>{
     return res.json({
         success:true,
-        message:"YOUR SERVER IS ACTIVATED"
+        message:"YOUR SERVE R IS ACTIVATED"
     })
   })
 
