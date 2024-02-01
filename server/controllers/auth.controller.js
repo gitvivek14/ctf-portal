@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+
 exports.login_post = asyncHandler(async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -21,7 +22,7 @@ exports.login_post = asyncHandler(async (req, res) => {
 });
 
 exports.register_post = asyncHandler(async (req,res) => {
-    
+
 })
 
 
