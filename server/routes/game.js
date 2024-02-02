@@ -8,9 +8,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//Login API : /auth/login
-const user = require('../controllers/auth.controller');
-router.post("/login",user.login_post);
 //Game API : /game
+const game = require('../controllers/game.controller');
+router.post("/control",game.control);
 
 module.exports = router;
