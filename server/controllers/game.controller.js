@@ -1,6 +1,6 @@
 const express = require('express');
 const Question = require('../models/question');
-const game = require('../models/game');
+const Game = require('../models/game');
 const router = express.Router();
 const asyncHandler = require('express-async-handler')
 

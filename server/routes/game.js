@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//Game API : /game
+//Game API : /game/control
 const game = require('../controllers/game.controller');
 router.post("/control",game.control);
 
