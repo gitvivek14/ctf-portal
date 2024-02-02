@@ -4,15 +4,33 @@ const Navbar = () => {
     
 const subLinks = [
     {
-        title:"python",
+        title:"Home",
         link:"/catalog/python"
-    },{
-        title:'webdev',
+    },
+    {
+        title:'Login',
         link:"/catalog/webdevelopment"
-    }
+    },
+    {
+        title:'Register',
+        link:"/catalog/webdevelopment"
+    },
+
 ]
   return (
-    <div className='flex h-14 items-center justify-center w-full flex-row '>
+    <div className='w-10/12 max-w-full flex h-14 items-center justify-center flex-row  '>
+        <div className='w-full p-4 flex flex-row items-center justify-start'>
+            {
+                subLinks.map((title,key)=>{
+                    return(
+                        <div key={key} className='text-white p-4' style={{fontFamily:"Hack"}}>
+                            {title.title}
+                        </div>
+                    )
+                })
+            }
+
+        </div>
         
        
 
