@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+const jwt = require("jsonwebtoken")
 
 exports.login_post = asyncHandler(async (req, res) => {
     try {
@@ -12,7 +13,27 @@ exports.login_post = asyncHandler(async (req, res) => {
         if (user.password !== password) {
             return res.status(401).json({ message: 'Invalid password' });
         }
-        res.status(200).json({ message: 'Login successful' });
+        // create token
+        const payload = {
+            email:email,
+            id:user._id,
+        }
+        const token = jwt.sign(payload,process.env.JWT_SECRET,{
+            expiresIn:"1d"
+        })
+        user.token = token;
+        const options = {
+            expires: new Date(Date.now()+3*24*60*60*1000),
+                httpOnly:true
+        }
+        res.cookie("token",token,options).status(200).json({
+            success:true,
+            message:"LOGGED IN SUCCESFULLY",
+                user,
+                payload
+        })
+        // passeord ?null
+
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
