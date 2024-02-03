@@ -1,19 +1,20 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     
 const subLinks = [
     {
         title:"Home",
-        link:"/catalog/python"
+        link:"/home"
     },
     {
         title:'Login',
-        link:"/catalog/webdevelopment"
+        link:"/login"
     },
     {
         title:'Register',
-        link:"/catalog/webdevelopment"
+        link:"/signup"
     },
 
 ]
@@ -21,11 +22,13 @@ const subLinks = [
     <div className='w-10/12 max-w-full flex h-14 items-center justify-center flex-row  '>
         <div className='w-full p-4 flex flex-row items-center justify-start'>
             {
-                subLinks.map((title,key)=>{
+                subLinks.map((links,key)=>{
                     return(
+                        <Link to={links.link}>
                         <div key={key} className='text-white p-4' style={{fontFamily:"Hack"}}>
-                            {title.title}
+                            {links.title}
                         </div>
+                        </Link>
                     )
                 })
             }
