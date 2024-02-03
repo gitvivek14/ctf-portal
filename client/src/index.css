@@ -83,6 +83,6 @@
  @font-face {
   font-family: "Hackk";
   src: local("Hack-Regular"),
-   url("./fonts/Hack/Hack-Regular.woff") format(".woff");
+   url("./fonts/Hack/Hack-Regular.ttf") format(".woff");
   font-weight: bold;
  }

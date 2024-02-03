@@ -27,7 +27,9 @@
     "redux-toolkit": "^1.1.2",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "tsparticles": "2.1.0"
+    "tsparticles": "2.1.0",
+    "@reduxjs/toolkit": "^1.9.5"
+    
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
