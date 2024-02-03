@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
-const GameSchema = new Schema({
+
+const GameSchema = new mongoose.Schema({
   questionNo:{
     type : String,
     required : true
@@ -10,7 +10,7 @@ const GameSchema = new Schema({
     type : String,
     required : true
   },
-  email1: {
+  email: {
     type: String,
     required : true,
     unique : true

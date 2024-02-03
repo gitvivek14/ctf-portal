@@ -17,6 +17,17 @@ app.get("/",(req,res)=>{
     })
   })
 
+app.use((_req,res,next)=>{
+  res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+  next();
+})
+app.use(cors({
+  origin:"*",
+  credentials:true
+}))
+
 //Routes
 const auth = require('./routes/auth');
 app.use('/auth', auth);
