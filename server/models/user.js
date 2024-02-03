@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  teamName:{
+  teamname:{
     type : String,
     required : true
   },
-  email1: {
+  email: {
     type: String,
     required : true,
     unique:true,
@@ -18,6 +18,9 @@ const UserSchema = new Schema({
   game:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'game'
+  },
+  image:{
+    type:String,
   }
 });
 

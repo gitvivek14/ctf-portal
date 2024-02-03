@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Login API : /auth/login
 const user = require('../controllers/auth.controller');
 router.post("/login",user.login_post);
+router.post("/signup",user.signup)
 //Game API : /game
 
 module.exports = router;
