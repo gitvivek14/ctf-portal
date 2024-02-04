@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/joy": "^5.0.0-beta.25",
     "@nekzus/react-hacker-effect": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
+    "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -27,9 +31,7 @@
     "redux-toolkit": "^1.1.2",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "tsparticles": "2.1.0",
-    "@reduxjs/toolkit": "^1.9.5"
-    
+    "tsparticles": "2.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

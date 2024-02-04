@@ -46,3 +46,7 @@
 .font-face-hk {
   font-family: "Hackk";
 }
+.homebg{
+  background-image: url("../src/assets/images/bg3.jpg");
+  mix-blend-mode: difference;
+}
