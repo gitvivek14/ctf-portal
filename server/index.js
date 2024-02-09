@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors');
 const connectToMongo = require('./config/database');
+const socketIo = require('socket.io');
+const http = require('http');
 const app = express();
 
 // fetching port from env file | if not present default - 4000
@@ -18,6 +20,8 @@ app.get("/",(req,res)=>{
     })
   })
 
+const server = http.createServer(app);
+const io = socketIo(server);
 app.use((_req,res,next)=>{
   res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -28,6 +32,19 @@ app.use(cors({
   origin:"*",
   credentials:true
 }))
+
+//socket connection
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Example: Emit a welcome message to the client upon connection
+  socket.emit('message', 'Welcome to the server!');
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+});
 
 //Routes
 const auth = require('./routes/auth');
