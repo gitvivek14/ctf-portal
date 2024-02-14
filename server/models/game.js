@@ -3,20 +3,19 @@ const mongoose = require('mongoose');
 
 const GameSchema = new mongoose.Schema({
   questionNo:{
-    type : String,
+    type : Number,
     required : true
   },
   level:{
-    type : String,
+    type : Number,
     required : true
   },
   email: {
     type: String,
-    required : true,
-    unique : true
+    required : true
   },
   teamPoints:{
-    type : String,
+    type : Number,
     required : true
   },
   user : {
@@ -27,5 +26,9 @@ const GameSchema = new mongoose.Schema({
     type : Array,
     default : [0, 0, 0, 0]   
 },
+  answered : {
+   type : Array,
+   default : [[0,0,0,0],[0,0,0],[0,0],[0],[0]]
+}
 });
 module.exports = mongoose.model('Game', GameSchema);

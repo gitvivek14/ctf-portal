@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
 const QuestionSchema = new mongoose.Schema({
   questionNo:{
-    type : String,
+    type : Number,
     required : true
   },
   level:{
-    type : String,
+    type : Number,
     required : true
   },
   question:{
@@ -15,16 +14,12 @@ const QuestionSchema = new mongoose.Schema({
     required : true
   },
   questionPoints : {
-    type : String,
+    type : Number,
     required : true
   },
   answer:{
     type : String,
     required : true
-  },
-  answered : {
-    type : Array,
-    default : [false, false, false, false],
   }
 });
 
