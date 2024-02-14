@@ -9,11 +9,12 @@ exports.control = asyncHandler(async (req,res) => {
         const {questionNo, level, teamPoints, email, ans} = req.body;
         let question = await Question.findOne({level:level, questionNo: questionNo});
         let game = await Game.findOne({email : email});
-        ans = ans.trim();
+        ans = ans.trim().toLowercase();
+        console.log(ans);
         if(ans == question.answer)
         {
             game.teamPoints = teamPoints + question.questionPoints;
-            question.answered[question.questionNo - 1] = true;
+            game.answered[question.level - 1][question.questionNo - 1] = 1;
         }
         else{
             res.json({
@@ -22,16 +23,16 @@ exports.control = asyncHandler(async (req,res) => {
             });
         }
         game.save();
-        let flag = true;
-        for(let i = 0; i < question.answered.length(); i++)
+        let flag = false;
+        for(let i = 0; i < game[game.level - 1].answered.length(); i++)
         {
-            if(question.answered[i] === false)
+            if(game.answered[game.level-1][i] === 0)
             flag = false;
         }
 
         if(flag === true)
         {
-            question.level += 1;
+            game.level += 1;
         }
          
     } catch (error) {

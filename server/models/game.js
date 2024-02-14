@@ -26,5 +26,9 @@ const GameSchema = new mongoose.Schema({
     type : Array,
     default : [0, 0, 0, 0]   
 },
+  answered : {
+   type : Array,
+   default : [[0,0,0,0],[0,0,0],[0,0],[0],[0]]
+}
 });
 module.exports = mongoose.model('Game', GameSchema);
