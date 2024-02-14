@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Game = require('../models/game');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken")
@@ -44,7 +45,7 @@ exports.login_post = asyncHandler(async (req, res) => {
 exports.signup = async (req,res)=>{
     try {
         const {teamname,email,password,confirmpwd} = req.body;
-        if(!email|| !password){
+        if(!email || !password || !confirmpwd){
             return res.status(403).json({
                 success:false,
                 message:"Fill all the details"
@@ -63,12 +64,23 @@ exports.signup = async (req,res)=>{
                 message: "USER ALREADY REGISTERED"
             })
         }
+
+        // Create a new user
+        const game = await Game.create({
+            questionNo:1,
+            level : 1,
+            email:email,
+            teamPoints:"0"
+        })
+
         const user  = await User.create({
             teamname:teamname,
             email:email,
             password:password,
-            image:`https://api.dicebear.com/6.x/initials/svg?seed=${teamname}`
+            image:`https://api.dicebear.com/6.x/initials/svg?seed=${teamname}`,
+            game:game._id
         })
+
 
         return res.status(200).json({
             success:true,
@@ -77,9 +89,7 @@ exports.signup = async (req,res)=>{
         })
         
     } catch (error) {
-        console.log("internal .........")
         console.log(error)
         return res.status(500).json({error:'Internal Server Error'})
-        
     }
 }

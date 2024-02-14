@@ -51,6 +51,6 @@ const auth = require('./routes/auth');
 app.use('/auth', auth);
 const game = require('./routes/game');
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   })

@@ -3,20 +3,19 @@ const mongoose = require('mongoose');
 
 const GameSchema = new mongoose.Schema({
   questionNo:{
-    type : String,
+    type : Number,
     required : true
   },
   level:{
-    type : String,
+    type : Number,
     required : true
   },
   email: {
     type: String,
-    required : true,
-    unique : true
+    required : true
   },
   teamPoints:{
-    type : String,
+    type : Number,
     required : true
   },
   user : {

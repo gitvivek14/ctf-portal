@@ -23,8 +23,7 @@ const QuestionSchema = new mongoose.Schema({
     required : true
   },
   answered : {
-    type : Array,
-    default : [false, false, false, false],
+    type : Array
   }
 });
 

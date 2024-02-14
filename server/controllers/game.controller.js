@@ -6,9 +6,9 @@ const asyncHandler = require('express-async-handler')
 
 exports.control = asyncHandler(async (req,res) => {
     try{
-        const {questionNo, level, teamPoints, email1, ans} = req.body;
+        const {questionNo, level, teamPoints, email, ans} = req.body;
         let question = await Question.findOne({level:level, questionNo: questionNo});
-        let game = await Game.findOne({email1 : email1});
+        let game = await Game.findOne({email : email});
         ans = ans.trim();
         if(ans == question.answer)
         {
