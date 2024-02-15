@@ -70,7 +70,8 @@ exports.signup = async (req,res)=>{
             questionNo:1,
             level : 1,
             email:email,
-            teamPoints:0
+            teamPoints:0,
+            answered : [[0,0,0,0],[0,0,0],[0,0],[0],[0]]
         })
 
         const user  = await User.create({

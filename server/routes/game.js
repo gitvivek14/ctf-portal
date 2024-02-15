@@ -11,5 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Game API : /game/control
 const game = require('../controllers/game.controller');
 router.post("/control",game.control);
+router.post("/addQuestion", game.addQuestion);
 
 module.exports = router;
