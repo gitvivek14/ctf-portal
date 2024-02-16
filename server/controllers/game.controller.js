@@ -47,37 +47,63 @@ exports.getQuestions = asyncHandler(async(req,res)=>{
     console.log("error in fetching questions ",error);  
   }
 })
-exports.control = asyncHandler(async (req, res) => {
-  try {
-    const { questionNo, level, email, answer } = req.body;
-    // var question = await Question.findOne({
-    //   level: level,
-    //   questionNo: questionNo,
-    // });
-    // var game = await Game.findOne({ email: email });
-    // if (game.answered[question.level - 1][question.questionNo - 1] == 1)
-    //   if (!questionNo || !level || !teamPoints || !email || !answer) {
-    //     return res.status(502).json({
-    //       message: "Fields required",
-    //     });
-    //   }
-    let question = await Question.findOne({
-      level: level,
-      questionNo: questionNo,
-    });
-    let game = await Game.findOne({ email: email });
-    ans = answer.trim().toLowercase();
-    console.log(ans);
-    if (ans == question.answer) {
-      return res.json({
-        message: "Question already answered",
-        success: false,
-      });
-    } else if (answer === question.answer) {
-      game.teamPoints = game.teamPoints + question.questionPoints;
-      game.answered[question.level - 1][question.questionNo - 1] = 1;
-      console.log(game);
-      await game.save();
+
+
+
+exports.control = asyncHandler(async (req,res) => {
+    try{
+
+        const {questionNo, level, email, answer} = req.body;
+        var question = await Question.findOne({level:level, questionNo: questionNo});
+        var game = await Game.findOne({email : email});
+        if(game.answered[question.level - 1][question.questionNo - 1] == 1)
+
+        const {questionNo, level, teamPoints, email, ans} = req.body;
+        if(!questionNo || !level || !teamPoints || !email || !ans){
+            return res.status(502).json(
+                {
+                    message:"Fields required",
+                }
+            )
+        }
+        let question = await Question.findOne({level:level, questionNo: questionNo});
+        let game = await Game.findOne({email : email});
+        ans = ans.trim().toLowercase();
+        console.log(ans);
+        if(ans == question.answer)
+
+        {
+            return res.json({
+                message : "Question already answered",
+                success : false
+            });
+        }
+        else if(answer === question.answer)
+        {
+            game.teamPoints = game.teamPoints + question.questionPoints;
+            game.answered[question.level - 1][question.questionNo - 1] = 1;
+            await game.save();
+            console.log(game);
+
+            var flag = true;
+            for(let i = 0; i < game.answered[game.level - 1].length; i++)
+            {
+                if(game.answered[game.level-1][i] == 0)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag === true)
+            {
+                game.level += 1;
+                await game.save();
+            }
+
+            return res.status(200).json({
+            message:"Game Updated",
+            game
+        })
 
       var flag = true;
       for (let i = 0; i < game.answered[game.level - 1].length; i++) {
