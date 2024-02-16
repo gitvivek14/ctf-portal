@@ -62,8 +62,6 @@ const game = require('./routes/game');
 app.use('/game',game)
 app.use("/userd",userroutes)
 
-
-
 server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   })
