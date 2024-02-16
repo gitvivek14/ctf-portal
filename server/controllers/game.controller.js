@@ -33,6 +33,14 @@ exports.getQuestions = asyncHandler(async(req,res)=>{
     const response = await Question.find({
       level:level
     })
+
+    const data = {
+      questionNo:response.questionNo,
+      level:response.level,
+      question:response.question,
+      questionPoints:response.questionPoints,
+    }
+
     if(!response){
       return res.status(403).json({
         message:"no questions for this level"
@@ -40,7 +48,7 @@ exports.getQuestions = asyncHandler(async(req,res)=>{
     }
     return res.status(200).json({
       message:"questions fetched succesfully",
-      data:response
+      data
     })
     
   } catch (error) {
@@ -123,12 +131,3 @@ exports.control = asyncHandler(async (req, res) => {
   }
 });
 
-exports.leaderboard = asyncHandler(async (io) => {
-  try {
-    const teams = await game.find({}).sort({ teamPoints: 1 }).exec();
-    io.emit("leader", { success: true, leaderboard: teams });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    io.emit("leader", { success: false, message: "Internal Server Error" });
-  }
-});

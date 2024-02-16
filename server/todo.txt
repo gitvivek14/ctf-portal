@@ -1,3 +1,2 @@
-- question add API
 - Leaderboard
 - Push Notification
