@@ -111,11 +111,16 @@ exports.control = asyncHandler(async (req, res) => {
       },{now:true})
 
       console.log(updated);
-
+      const data = {
+        teamPoints : updated.teamPoints,
+        questionNo : updated.questionNo,
+        level : updated.level
+      }
       
       return res.status(200).json({
         message: "Game Updated",
-        updated,
+        status : true,
+        data
       });
      
       }
