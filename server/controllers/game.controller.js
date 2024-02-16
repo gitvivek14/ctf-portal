@@ -66,14 +66,14 @@ exports.control = asyncHandler(async (req, res) => {
       questionNo: questionNo,
     });
     let game = await Game.findOne({ email: email });
-    ans = answer.trim().toLowercase();
+    let ans = answer.trim();
     console.log(ans);
-    if (ans == question.answer) {
+    if (game.answered[question.level - 1][question.questionNo - 1] == 1) {
       return res.json({
         message: "Question already answered",
         success: false,
-      });
-    } else if (answer === question.answer) {
+      })
+    } else if (ans === question.answer && game.answered[question.level - 1][question.questionNo - 1] == 0) {
       game.teamPoints = game.teamPoints + question.questionPoints;
       game.answered[question.level - 1][question.questionNo - 1] = 1;
       console.log(game);
@@ -89,16 +89,17 @@ exports.control = asyncHandler(async (req, res) => {
       if (flag === true) {
         game.level += 1;
         await game.save();
-      } else {
-        res.json({
-          message: "WRONG ANSWER",
-          success: false,
-        });
-      }
+      } 
       return res.status(200).json({
         message: "Game Updated",
         game,
       });
+      }
+      else {
+        res.json({
+          message: "WRONG ANSWER",
+          success: false,
+        });
     }
   } catch (err) {
     console.log(err);
