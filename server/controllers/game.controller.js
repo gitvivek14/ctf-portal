@@ -31,17 +31,17 @@ exports.addQuestion = asyncHandler(async (req, res) => {
 exports.control = asyncHandler(async (req, res) => {
   try {
     const { questionNo, level, email, answer } = req.body;
-    var question = await Question.findOne({
-      level: level,
-      questionNo: questionNo,
-    });
-    var game = await Game.findOne({ email: email });
-    if (game.answered[question.level - 1][question.questionNo - 1] == 1)
-      if (!questionNo || !level || !teamPoints || !email || !answer) {
-        return res.status(502).json({
-          message: "Fields required",
-        });
-      }
+    // var question = await Question.findOne({
+    //   level: level,
+    //   questionNo: questionNo,
+    // });
+    // var game = await Game.findOne({ email: email });
+    // if (game.answered[question.level - 1][question.questionNo - 1] == 1)
+    //   if (!questionNo || !level || !teamPoints || !email || !answer) {
+    //     return res.status(502).json({
+    //       message: "Fields required",
+    //     });
+    //   }
     let question = await Question.findOne({
       level: level,
       questionNo: questionNo,
