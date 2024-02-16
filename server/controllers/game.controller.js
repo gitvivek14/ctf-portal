@@ -34,13 +34,6 @@ exports.getQuestions = asyncHandler(async(req,res)=>{
       level:level
     })
 
-    const data = {
-      questionNo:response.questionNo,
-      level:response.level,
-      question:response.question,
-      questionPoints:response.questionPoints,
-    }
-
     if(!response){
       return res.status(403).json({
         message:"no questions for this level"
