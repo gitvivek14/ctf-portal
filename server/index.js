@@ -4,10 +4,19 @@ const connectToMongo = require('./config/database');
 const socketIo = require('socket.io');
 const http = require('http');
 const app = express();
-
+const socket = require("socket.io")
+const userroutes = require("./routes/user")
+// const {Server} = socket
+// const server = require("http").createServer(app)
 // fetching port from env file | if not present default - 4000
 const port = process.env.port||4000;
-
+// const io = new Server(server,{
+//   cors:{
+//     origin:"*",
+//     credentials:true,
+//     methods:["GET","POST"]
+//   }
+// })
 app.use(express.json());
 require("dotenv").config();
 require("./config/database");
@@ -50,7 +59,8 @@ io.on('connection', (socket) => {
 const auth = require('./routes/auth');
 app.use('/auth', auth);
 const game = require('./routes/game');
-app.use('/game', game);
+app.use('/game',game)
+app.use("/userd",userroutes)
 
 server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -4,6 +4,7 @@ import { apiconnector } from "../apiconnector"
 
 import {setLoading,setSignUpData,setToken} from "../../slices/authSlice"
 import {setUser} from "../../slices/profileSlice"
+import {setEmail} from "../../slices/gameSlice"
 
 export function signup(teamname,email,password,confirmpwd,navigate){
     return async (dispatch)=>{
@@ -34,9 +35,6 @@ export function signup(teamname,email,password,confirmpwd,navigate){
         }
     }
 }
-
-
-
 export function login(email,password,navigate){
     return async (dispatch)=>{
         const toastId = toast.loading("Loading..")
@@ -57,13 +55,12 @@ export function login(email,password,navigate){
         dispatch(setUser({
             ...response.data.user , image:response.data.user.image
         }))
-
+        dispatch(setEmail(email))
         localStorage.setItem("token",JSON.stringify(response.data.user.token))
         navigate('/')
         } catch (error) {
             console.log("login api error");
             toast.error("Login Error");
-            
         }
         finally{
             dispatch(setLoading(false))
