@@ -9,6 +9,7 @@ const persistedState = localStorage.getItem("reduxgameState")
       level: "",
       email: "",
       questionNo: "",
+      questions:[],
       loading: false,
     };
 const initialState = {
@@ -36,6 +37,9 @@ const gameSlice = createSlice({
         },
         setLoading(state,value){
             state.loading=value.payload
+        },
+        setquestions(state,value){
+            state.questions = value.payload;
         }
     }
 })
@@ -56,5 +60,5 @@ const saveState = (state) => {
 //     saveState(gameSlice.getState());
 //   });
 
-export const{setFlags,setLevel,setScore,setEmail,setquestionNo,setLoading} = gameSlice.actions
+export const{setFlags,setLevel,setScore,setEmail,setquestionNo,setLoading,setquestions} = gameSlice.actions
 export default gameSlice.reducer

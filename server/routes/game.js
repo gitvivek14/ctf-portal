@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const game = require('../controllers/game.controller');
 router.post("/control",game.control);
 router.post("/addQuestion", game.addQuestion);
-router.get("/getquestions",game.getQuestions)
+router.post("/getquestions",game.getQuestions)
 
 router.post("/leaderboard", (req, res) => {
    

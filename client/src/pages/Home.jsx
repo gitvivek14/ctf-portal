@@ -13,8 +13,6 @@ import { useDispatch,useSelector } from 'react-redux';
 const Home = () => {
   const dispatch = useDispatch();
   const {questionNo,level} =useSelector((state)=> state.game)
-
-  
   console.log("printing",level);
   const [Locked, setLocked] = useState(true)
   const [open, setOpen] = useState(false)

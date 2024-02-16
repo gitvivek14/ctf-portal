@@ -8,16 +8,22 @@ import  hunt from "../../assets/powerups/hunt.png"
 import  doll from "../../assets/powerups/doll.png"
 import  piggybank from "../../assets/powerups/piggybank.png"
 import { FaRegLightbulb } from "react-icons/fa";
+import { useDispatch,useSelector } from 'react-redux'
+import {getQuestions} from "../../services/operations/gameapi"
 
 import QuesModal from '@/components/QuesModal'
 const Level = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false)
-  const [data, setdata] = useState({})
+  const [data, setdata] = useState([])
+  const {questions} = useSelector((state)=>state.game)
+  // console.log(questions);
   const handleCard = (data1)=>{
     setOpen(!open)
     setdata(data1)
   }
   const {id} = useParams()
+  console.log("iddd",id);
   const ques = [
     {
       question:"What is me",
@@ -36,6 +42,10 @@ const Level = () => {
       no:"4"
     },
   ]
+  useEffect(() => {
+    dispatch(getQuestions(1));
+  }, [])
+  
   return (
     <div className='w-screen h-screen max-w-max p-4 flex flex-col items-start justify-start overflow-x-auto overflow-y-auto'>
       <div className='w-full flex items-center justify-center'>
