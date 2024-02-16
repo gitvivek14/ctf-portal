@@ -31,10 +31,26 @@ exports.addQuestion = asyncHandler(async (req,res) => {
 
 exports.control = asyncHandler(async (req,res) => {
     try{
+
         const {questionNo, level, email, answer} = req.body;
         var question = await Question.findOne({level:level, questionNo: questionNo});
         var game = await Game.findOne({email : email});
         if(game.answered[question.level - 1][question.questionNo - 1] == 1)
+
+        const {questionNo, level, teamPoints, email, ans} = req.body;
+        if(!questionNo || !level || !teamPoints || !email || !ans){
+            return res.status(502).json(
+                {
+                    message:"Fields required",
+                }
+            )
+        }
+        let question = await Question.findOne({level:level, questionNo: questionNo});
+        let game = await Game.findOne({email : email});
+        ans = ans.trim().toLowercase();
+        console.log(ans);
+        if(ans == question.answer)
+
         {
             return res.json({
                 message : "Question already answered",
@@ -57,29 +73,23 @@ exports.control = asyncHandler(async (req,res) => {
                     break;
                 }
             }
-
             if(flag === true)
             {
                 game.level += 1;
                 await game.save();
             }
 
-            res.json({
-                message : "Correct Answer",
-                success : true
-            })
+            return res.status(200).json({
+            message:"Game Updated",
+            game
+        })
         }
         else{
             res.json({
                message:"WRONG ANSWER",
                success:false
             });
-        }         
-    } catch(error){
-        console.error();
-        return res.status(400).json({
-            message : error,
-            success:false
+
          })       
     }
 });

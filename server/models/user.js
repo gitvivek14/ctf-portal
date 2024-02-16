@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
   },
   game:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'game'
+    ref:'Game'
   },
   image:{
     type:String,
