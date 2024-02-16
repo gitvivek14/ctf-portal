@@ -25,10 +25,8 @@ const GameSchema = new mongoose.Schema({
     default : [0, 0, 0, 0]   
 },
   answered : {
-   type : Array
-  },
-flags:{
-  type:Number
-}
+   type : Array,
+   default : [[false,false,false,false],[false,false,false],[false,false],[false],[false]]
+  }
 });
 module.exports = mongoose.model('Game', GameSchema);
