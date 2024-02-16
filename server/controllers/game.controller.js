@@ -61,39 +61,55 @@ exports.control = asyncHandler(async (req, res) => {
     //       message: "Fields required",
     //     });
     //   }
-    let question = await Question.findOne({
+    const question = await Question.findOne({
       level: level,
       questionNo: questionNo,
     });
-    let game = await Game.findOne({ email: email });
-    let ans = answer.trim();
+    const game = await Game.findOne({ email: email });
+    const game1 = game._id;
+    const game2 = await Game.findById({
+      _id:game1
+    });
+    console.log("game1",game1);
+    // const game1 = await Game.findById({_id:})
+    // console.log(game1);
+    console.log("game",game);
+    const ans = answer.trim();
     console.log(ans);
-    if (game.answered[question.level - 1][question.questionNo - 1] == true) {
+    if (game2.answered[question.level - 1][question.questionNo - 1] == true) {
       return res.json({
         message: "Question already answered",
         success: false,
       })
-    } else if (ans === question.answer && game.answered[question.level - 1][question.questionNo - 1] == false) {
-      game.teamPoints = game.teamPoints + question.questionPoints;
-      game.answered[question.level - 1][question.questionNo - 1] = true;
-      console.log(game);
-      await game.save();
+    } else if (ans === question.answer && game2.answered[question.level - 1][question.questionNo - 1] == false) {
+      game2.teamPoints = game2.teamPoints + question.questionPoints;
+      game2.answered[question.level - 1][question.questionNo - 1] = true;
+      console.log(game2);
+      await game2.save();
 
       var flag = true;
-      for (let i = 0; i < game.answered[game.level - 1].length; i++) {
-        if (game.answered[game.level - 1][i] == false) {
+      for (let i = 0; i < game2.answered[game2.level - 1].length; i++) {
+        if (game2.answered[game.level - 1][i] == false) {
           flag = false;
           break;
         }
       }
       if (flag === true) {
-        game.level += 1;
-        await game.save();
+        game2.level += 1;
+        await game2.save();
       } 
+      const updated  = await Game.findByIdAndUpdate({_id:game1},{
+        answered:game2.answered
+      },{now:true})
+
+      console.log(updated);
+
+      
       return res.status(200).json({
         message: "Game Updated",
-        game,
+        updated,
       });
+     
       }
       else {
         res.json({
@@ -101,6 +117,7 @@ exports.control = asyncHandler(async (req, res) => {
           success: false,
         });
     }
+
   } catch (err) {
     console.log(err);
   }
