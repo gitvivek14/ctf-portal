@@ -68,20 +68,21 @@ exports.control = asyncHandler(async (req, res) => {
     let game = await Game.findOne({ email: email });
     let ans = answer.trim();
     console.log(ans);
-    if (game.answered[question.level - 1][question.questionNo - 1] == 1) {
+    if (game.answered[question.level - 1][question.questionNo - 1] == true) {
       return res.json({
         message: "Question already answered",
         success: false,
       })
-    } else if (ans === question.answer && game.answered[question.level - 1][question.questionNo - 1] == 0) {
+    } else if (ans === question.answer && game.answered[question.level - 1][question.questionNo - 1] == false) {
       game.teamPoints = game.teamPoints + question.questionPoints;
-      game.answered[question.level - 1][question.questionNo - 1] = 1;
+      game.answered[question.level - 1][question.questionNo - 1] = true;
       console.log(game);
+      await Game.findByIdAndUpdate({email:email}, )
       await game.save();
 
       var flag = true;
       for (let i = 0; i < game.answered[game.level - 1].length; i++) {
-        if (game.answered[game.level - 1][i] == 0) {
+        if (game.answered[game.level - 1][i] == false) {
           flag = false;
           break;
         }
