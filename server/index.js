@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors');
 const connectToMongo = require('./config/database');
+const socketIo = require('socket.io');
+const http = require('http');
 const app = express();
 const socket = require("socket.io")
 
@@ -27,6 +29,8 @@ app.get("/",(req,res)=>{
     })
   })
 
+const server = http.createServer(app);
+const io = socketIo(server);
 app.use((_req,res,next)=>{
   res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -38,11 +42,25 @@ app.use(cors({
   credentials:true
 }))
 
+//socket connection
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Example: Emit a welcome message to the client upon connection
+  socket.emit('message', 'Welcome to the server!');
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+});
+
 //Routes
 const auth = require('./routes/auth');
 app.use('/auth', auth);
 const game = require('./routes/game');
 
+<<<<<<< HEAD
 io.on("connection",(socket)=>{
   console.log("user connected",socket.id);
   socket.emit("welcome",`welcometo${socket.id}`)
@@ -50,6 +68,8 @@ io.on("connection",(socket)=>{
 })
 
 
+=======
+>>>>>>> 71bb86fb731ca30c7366ad341313e998784f5d73
 server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   })
