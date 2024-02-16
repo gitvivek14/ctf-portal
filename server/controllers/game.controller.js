@@ -77,7 +77,6 @@ exports.control = asyncHandler(async (req, res) => {
       game.teamPoints = game.teamPoints + question.questionPoints;
       game.answered[question.level - 1][question.questionNo - 1] = true;
       console.log(game);
-      await Game.findByIdAndUpdate({email:email}, )
       await game.save();
 
       var flag = true;
