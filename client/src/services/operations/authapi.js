@@ -4,7 +4,7 @@ import { apiconnector } from "../apiconnector"
 
 import {setLoading,setSignUpData,setToken} from "../../slices/authSlice"
 import {setUser} from "../../slices/profileSlice"
-import {setEmail} from "../../slices/gameSlice"
+import {setEmail,setFlags,setLevel,setScore,setquestionNo} from "../../slices/gameSlice"
 
 export function signup(teamname,email,password,confirmpwd,navigate){
     return async (dispatch)=>{
@@ -51,6 +51,21 @@ export function login(email,password,navigate){
             throw new Error(response.data.message)
         }
         toast.success("Login Succesfull")
+        try {
+            const gresp = await apiconnector("POST","http://localhost:3000/userd/user",{
+                email
+            })
+            console.log(gresp);
+            if(!gresp){
+                throw new Error(gresp.data.message)
+            }
+            console.log(gresp.data.user.game.questionNo);
+            dispatch(setquestionNo(gresp.data.user.game.questionNo))
+            dispatch(setScore(gresp.data.user.teamPoints))
+            dispatch(setLevel(gresp.data.user.game.level))
+        } catch (error) {
+            console.log("api gresp error",error);
+        }
         dispatch(setToken(response.data.token))
         dispatch(setUser({
             ...response.data.user , image:response.data.user.image
