@@ -1,173 +1,121 @@
-import {React,useEffect,useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { Card, CardContent, CardCover, Button , 
   Modal,ModalDialog,DialogTitle,DialogContent,ModalClose,Input} from "@mui/joy"
-import { Car } from 'lucide-react'
+import  thunder from "../../assets/powerups/thunder.png"
+import  spades from "../../assets/powerups/spades.png"
+import  hunt from "../../assets/powerups/hunt.png"
+import  doll from "../../assets/powerups/doll.png"
+import  piggybank from "../../assets/powerups/piggybank.png"
+import { FaRegLightbulb } from "react-icons/fa";
 
+import QuesModal from '@/components/QuesModal'
 const Level = () => {
-  const { id } = useParams()
-  const [Question, setQuestion] = useState({
-    question:"Lorem, ipsum dolor sit amet consectetur  adipisicing elit. Iusto mollitia qui distinctio reprehenderit earum ullam itaque error...",
-    questionNo: 2,
-     Link:"www.google.com"
-
-  })
-  const [QuestionNo, setQuestionNo] = useState(1)
-  // setQuestion({
-  //   Question:"What is your Name?",
-  //   QuestionNo: 2,
-  //   Link:"www.google.com"
-  // })
-
-  const submit = ()=>{
-    console.log("submit");
+  const [open, setOpen] = useState(false)
+  const [data, setdata] = useState({})
+  const handleCard = (data1)=>{
+    setOpen(!open)
+    setdata(data1)
   }
-  useEffect(() => {
-    setQuestion({
-      question:ques[QuestionNo-1].question,
-      questionNo:QuestionNo
-    })
-    submit();
-  }, [QuestionNo])
-  
+  const {id} = useParams()
   const ques = [
     {
-      question : "what is name?",
-      no:1
+      question:"What is me",
+      no:"1"
     },
     {
-      question : "what is name2?",
-      no:2
+      question:"What is me",
+      no:"2"
     },
     {
-      question : "what is name3?",
-      no:3
+      question:"What is me",
+      no:"3"
     },
     {
-      question : "what is name4?",
-      no:4
+      question:"What is me",
+      no:"4"
     },
   ]
-  console.log(id);
-  console.log(Question);
   return (
-  <div className='w-full mx-auto flex flex-row items-center justify-center mt-5 p-2'>
-    <div className=''>
-      <Card className="w-96 h-[600px]">
-        <CardContent>
-          <div className='flex flex-col items-start justify-center'>
-            <div className='text-3xl text-red-500' style={{fontFamily:"Hack"}}>
-              LEVEL
+    <div className='w-screen h-screen max-w-max p-4 flex flex-col items-start justify-start overflow-x-auto overflow-y-auto'>
+      <div className='w-full flex items-center justify-center'>
+        <Card className="w-96">
+          <CardContent>
+            <div className='flex flex-col items-start justify-center p-2'>
+              <div className='text-red-600 text-3xl' style={{fontFamily:"Hack"}}>
+                LEVEL
+              </div>
+              <span style={{fontFamily:"Hack"}}>
+                {
+                  `0${id}`
+                }
+              </span>
             </div>
-            <span className='font-bold text-xl ' style={{fontFamily:"Hack"}}>
-              {
-                `0${id}`
-              }
-            </span>
-            </div>
-        </CardContent>
-      </Card>
-
-    </div>
-    <div className='relative flex flex-col flex-wrap items-center justify-center gap-4'>
-      {
-        ques.map((ques,key)=>(
-          <div key={key} onClick={()=> setQuestionNo(ques.no)}>
-            <Card className="w-96 h-[150px]">
-              <CardContent>
-                <div className='flex flex-col items-start justify-center'>
-                  <div className='text-xl' style={{fontFamily:"Hack"}}>
-                    Question
-                  </div>
-                  <span className='text-lg font-bold' style={{fontFamily:"Hack"}}>
-                  {
-                    `0${ques.no}`
-                  }
-                  </span>
-                  <div>
-                    Lorem, ipsum dolor sit amet consectetur 
-                    adipisicing elit. Iusto mollitia qui 
-                    distinctio reprehenderit earum ullam itaque error... 
-                    
-                   
-                  </div>
-                  {/* <div className='p-3'>
-                    <Button 
-                    size='lg'
-                    variant='solid'
-                    color='danger'
-                    >
-                      Solve the matrix
-                    </Button>
-                  </div> */}
-
-                </div>
-
-              </CardContent>
-            </Card>
-            </div>
-        ))
-      }
-
-    </div>
-
-    <div>
-      <Card>
-        <CardContent>
-          <div className=' w-full flex flex-col items-start justify-center max-w-max'>
-          <div>
-            {
-              Question && (
-                <div className='flex flex-col items-center justify-start flex-wrap'>
-                  <div style={{fontFamily:"Hack"}}>
-                    Question
+          </CardContent>
+        </Card>
+      </div>
+      <div className='w-[100%] h-full flex items-center justify-center p-7 gap-5 '>
+        {
+          ques.map((ques,idx)=>(
+            <div className='w-full h-full hover:scale-110 shadow-lg' onClick={()=> handleCard({ques})} key={idx}>
+              <Card>
+                <CardContent>
+                  <div className='flex flex-col items-center justify-center relative'>
+                    <div className=' w-full flex items-center justify-between'>
+                      <div className='font-bold text-red-600' style={{fontFamily:"Hack"}}>
+                      Question
+                      </div>
+                      <div>
+                        <FaRegLightbulb size={20}/>
+                      </div>
                     </div>
-                    <span style={{fontFamily:"Hack"}}>
-                      {
-                        `0${QuestionNo}`
-                      }
-                     
-                    </span>
-                    <div>
-                      {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quod inventore quasi iste, aliquid itaque dignissimos 
-                      officiis non nulla impedit exercitationem quaerat 
-                      debitis eaque, ullam autem esse eligendi delectus labore. */}
-                      {Question.question}
-                      </div>
-
-                    <div className='p-3'>
-
-                      <Input variant='outlined' color='danger' size='md' placeholder='Fla'>
-                      </Input>
-                      </div>
-                    <div className='flex items-center justify-center gap-4'>
-                      <Button size='md'
-                      color='warning'
-                      variant='solid'
-                      >
-                        Resources
-                      </Button>
-                      <Button size='md'
-                      color='danger'
-                      variant='solid'
-                      >
-                        Submit
-                      </Button>
-
-                      </div>
-
+                    <div className='absolute top-5 left-0 bottom-0' style={{fontFamily:"Hack"}}>
+                      {`0${ques.no}`}
+                    </div>
+                    <div className='p-4'>
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem aliquid, error sunt exercitationem, distinctio 
+                      consequatur pariatur soluta, minima eligendi 
+                      expedita corporis in unde obcaecati laudantium sed! Iste id recusandae tempora?
+                    </div>
                   </div>
-              )
-            }
-
-          </div>
-
-          </div>
-        </CardContent>
-      </Card>
+                </CardContent>
+              </Card>
+              </div>
+          ))
+        }
+      </div>
+      <div className='flex items-center justify-center w-full h-full'>
+        <div>
+          <button>
+            <div className='hover:scale-150 transition-all ease-in'>
+              <img src={thunder} width={100}></img>
+            </div>
+          </button>
+        </div>
+        <div>
+          <button>
+            <div className='hover:scale-150 transition-all ease-in'>
+              <img src={doll} width={100}></img>
+            </div>
+          </button>
+        </div>
+        <div>
+          <button>
+            <div className='hover:scale-150 transition-all ease-in'>
+              <img src={piggybank} width={100}></img>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div>
+      </div>
+      {
+        open && (
+          <QuesModal setOpen={setOpen} data={data}></QuesModal>
+        )
+      }
     </div>
-
-  </div>
   )
 }
+
 export default Level

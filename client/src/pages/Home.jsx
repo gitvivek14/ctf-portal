@@ -11,7 +11,7 @@ import { FaLock , FaUnlock } from "react-icons/fa";
 
 const Home = () => {
   const [Locked, setLocked] = useState(true)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [formData, setFormData] = useState({
     answer:""
   })

@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import Home from "../src/pages/Home"
 import Level from './pages/levels/Level'
 import {io} from "socket.io-client"
+import DashBoard from './pages/Dashboard/DashBoard'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         </Route>
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='level/:id' element={<Level></Level>}></Route>
+        <Route path='dash' element={<DashBoard></DashBoard>}></Route>
       </Routes>
       
 
