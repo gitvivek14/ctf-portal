@@ -27,7 +27,26 @@ exports.addQuestion = asyncHandler(async (req, res) => {
     });
   }
 });
-
+exports.getQuestions = asyncHandler(async(req,res)=>{
+  try {
+    const {level} =req.body;
+    const response = await Question.find({
+      level:level
+    })
+    if(!response){
+      return res.status(403).json({
+        message:"no questions for this level"
+      })
+    }
+    return res.status(200).json({
+      message:"questions fetched succesfully",
+      data:response
+    })
+    
+  } catch (error) {
+    console.log("error in fetching questions ",error);  
+  }
+})
 exports.control = asyncHandler(async (req, res) => {
   try {
     const { questionNo, level, email, answer } = req.body;

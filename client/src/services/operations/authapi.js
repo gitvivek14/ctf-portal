@@ -72,7 +72,7 @@ export function login(email,password,navigate){
         }))
         dispatch(setEmail(email))
         localStorage.setItem("token",JSON.stringify(response.data.user.token))
-        navigate('/')
+        navigate('/home')
         } catch (error) {
             console.log("login api error");
             toast.error("Login Error");
