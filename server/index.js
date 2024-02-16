@@ -6,17 +6,17 @@ const http = require('http');
 const app = express();
 const socket = require("socket.io")
 
-const {Server} = socket
-const server = require("http").createServer(app)
+// const {Server} = socket
+// const server = require("http").createServer(app)
 // fetching port from env file | if not present default - 4000
 const port = process.env.port||4000;
-const io = new Server(server,{
-  cors:{
-    origin:"*",
-    credentials:true,
-    methods:["GET","POST"]
-  }
-})
+// const io = new Server(server,{
+//   cors:{
+//     origin:"*",
+//     credentials:true,
+//     methods:["GET","POST"]
+//   }
+// })
 app.use(express.json());
 require("dotenv").config();
 require("./config/database");
@@ -59,17 +59,8 @@ io.on('connection', (socket) => {
 const auth = require('./routes/auth');
 app.use('/auth', auth);
 const game = require('./routes/game');
+app.use('/game',game)
 
-<<<<<<< HEAD
-io.on("connection",(socket)=>{
-  console.log("user connected",socket.id);
-  socket.emit("welcome",`welcometo${socket.id}`)
-
-})
-
-
-=======
->>>>>>> 71bb86fb731ca30c7366ad341313e998784f5d73
 server.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   })

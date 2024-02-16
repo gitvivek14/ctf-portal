@@ -4,6 +4,8 @@ const initialState = {
     score:"",
     flagsCaptured:"",
     level:"",
+    email:"",
+    questionNo:"",
     loading: false,
   }
 
@@ -19,9 +21,18 @@ const gameSlice = createSlice({
         },
         setFlags(state,value){
             state.flagsCaptured=value.payload
+        },
+        setEmail(state,value){
+            state.email=value.payload;
+        },
+        setquestionNo(state,value){
+            state.questionNo=value.payload;
+        },
+        setLoading(state,value){
+            state.loading=value.payload
         }
     }
 })
 
-export const{setFlags,setLevel,setScore} = gameSlice.actions
+export const{setFlags,setLevel,setScore,setEmail,setquestionNo,setLoading} = gameSlice.actions
 export default gameSlice.reducer

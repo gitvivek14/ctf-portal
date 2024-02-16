@@ -7,6 +7,13 @@ const asyncHandler = require('express-async-handler')
 exports.control = asyncHandler(async (req,res) => {
     try{
         const {questionNo, level, teamPoints, email, ans} = req.body;
+        if(!questionNo || !level || !teamPoints || !email || !ans){
+            return res.status(502).json(
+                {
+                    message:"Fields required",
+                }
+            )
+        }
         let question = await Question.findOne({level:level, questionNo: questionNo});
         let game = await Game.findOne({email : email});
         ans = ans.trim().toLowercase();
