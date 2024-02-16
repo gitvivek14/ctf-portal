@@ -1,5 +1,5 @@
 // import Card from '@/components/Card'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import img from "../assets/images/bg2.png"
 import { Card, CardContent, CardCover, Button , 
   Modal,ModalDialog,DialogTitle,DialogContent,ModalClose,Input} from "@mui/joy"
@@ -7,11 +7,17 @@ import { useNavigate } from 'react-router-dom'
 import { FcLock } from "react-icons/fc";
 import { FcUnlock } from "react-icons/fc";
 import { FaLock , FaUnlock } from "react-icons/fa";
+import { useDispatch,useSelector } from 'react-redux';
 
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const {questionNo,level} =useSelector((state)=> state.game)
+
+  
+  console.log("printing",level);
   const [Locked, setLocked] = useState(true)
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [formData, setFormData] = useState({
     answer:""
   })
@@ -47,7 +53,9 @@ const Home = () => {
                       </h1>
                     </div>
                     <div className='-top-3'>
-                      <p className='text-4xl' style={{ fontFamily: "Hack" }}>00</p>
+                      <p className='text-4xl' style={{ fontFamily: "Hack" }}>{
+                        `0${level}`
+                      }</p>
                     </div>
                   </div>
 

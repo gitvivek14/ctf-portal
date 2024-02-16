@@ -1,12 +1,18 @@
 import {createSlice} from "@reduxjs/toolkit"
+import { useSelector } from "react-redux";
+const persistedState = localStorage.getItem("reduxgameState")
+  ? JSON.parse(localStorage.getItem("reduxgameState"))
+  : {
+      user: "",
+      score: "",
+      flagsCaptured: "",
+      level: "",
+      email: "",
+      questionNo: "",
+      loading: false,
+    };
 const initialState = {
-    user:"",
-    score:"",
-    flagsCaptured:"",
-    level:"",
-    email:"",
-    questionNo:"",
-    loading: false,
+        ...persistedState
   }
 
 const gameSlice = createSlice({
@@ -33,6 +39,22 @@ const gameSlice = createSlice({
         }
     }
 })
+const saveState = (state) => {
+    try {
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem("reduxgameState", serializedState);
+    } catch(err) {
+        console.log("errrrrrrr",err)
+      // ignore write errors
+    }
+  };
+
+
+
+
+// gameSlice.subscribe(() => {
+//     saveState(gameSlice.getState());
+//   });
 
 export const{setFlags,setLevel,setScore,setEmail,setquestionNo,setLoading} = gameSlice.actions
 export default gameSlice.reducer

@@ -71,7 +71,8 @@ exports.signup = async (req,res)=>{
             level : 1,
             email:email,
             teamPoints:0,
-            answered : [[0,0,0,0],[0,0,0],[0,0],[0],[0]]
+            answered : [[0,0,0,0],[0,0,0],[0,0],[0],[0]],
+            flags:0
         })
 
         const user  = await User.create({
