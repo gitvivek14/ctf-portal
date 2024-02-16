@@ -30,18 +30,18 @@ exports.addQuestion = asyncHandler(async (req, res) => {
 exports.getQuestions = asyncHandler(async(req,res)=>{
   try {
     const {level} =req.body;
-    const response = await Question.find({
+    const data = await Question.find({
       level:level
     })
 
-    if(!response){
+    if(!data){
       return res.status(403).json({
         message:"no questions for this level"
       })
     }
     return res.status(200).json({
       message:"questions fetched succesfully",
-      response
+      data
     })
     
   } catch (error) {
