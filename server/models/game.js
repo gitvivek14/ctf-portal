@@ -26,6 +26,9 @@ const GameSchema = new mongoose.Schema({
 },
   answered : {
    type : Array
-  }
+  },
+flags:{
+  type:Number
+}
 });
 module.exports = mongoose.model('Game', GameSchema);
