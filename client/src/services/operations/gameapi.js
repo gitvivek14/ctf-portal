@@ -44,7 +44,7 @@ export function getQuestions(level){
             }
             toast.success("Welcome")
             console.log("prijting resp",response);
-            // dispatch(setquestions(response.data.data))
+            dispatch(setquestions(response.data.data))
         } catch (error) {
             console.log(error);
         }
