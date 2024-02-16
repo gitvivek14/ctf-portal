@@ -17,7 +17,7 @@ const Level = () => {
   const [open, setOpen] = useState(false)
   const [data, setdata] = useState([])
   const {questions} = useSelector((state)=>state.game)
-  // console.log(questions);
+  console.log("printing lebel questions",questions);
   const handleCard = (data1)=>{
     setOpen(!open)
     setdata(data1)
@@ -43,8 +43,8 @@ const Level = () => {
     },
   ]
   useEffect(() => {
-    dispatch(getQuestions(1));
-  }, [])
+    dispatch(getQuestions(id));
+  }, [id])
   
   return (
     <div className='w-screen h-screen max-w-max p-4 flex flex-col items-start justify-start overflow-x-auto overflow-y-auto'>
@@ -66,7 +66,7 @@ const Level = () => {
       </div>
       <div className='w-[100%] h-full flex items-center justify-center p-7 gap-5 '>
         {
-          ques.map((ques,idx)=>(
+          questions.map((ques,idx)=>(
             <div className='w-full h-full hover:scale-110 shadow-lg' onClick={()=> handleCard({ques})} key={idx}>
               <Card>
                 <CardContent>
@@ -80,12 +80,13 @@ const Level = () => {
                       </div>
                     </div>
                     <div className='absolute top-5 left-0 bottom-0' style={{fontFamily:"Hack"}}>
-                      {`0${ques.no}`}
+                      {`0${ques.questionNo}`}
                     </div>
                     <div className='p-4'>
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem aliquid, error sunt exercitationem, distinctio 
+                      {ques.question}
+                      {/* Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem aliquid, error sunt exercitationem, distinctio 
                       consequatur pariatur soluta, minima eligendi 
-                      expedita corporis in unde obcaecati laudantium sed! Iste id recusandae tempora?
+                      expedita corporis in unde obcaecati laudantium sed! Iste id recusandae tempora? */}
                     </div>
                   </div>
                 </CardContent>
