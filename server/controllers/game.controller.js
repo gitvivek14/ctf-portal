@@ -41,10 +41,14 @@ exports.control = asyncHandler(async (req,res) => {
         {
             game.level += 1;
         }
+        return res.status(200).json({
+            message:"Game Updated",
+            game
+        })
          
     } catch (error) {
         return res.status(400).json({
-            message:error,
+            message:"error ",
             success:false,
          })       
     }
