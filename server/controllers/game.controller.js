@@ -45,8 +45,8 @@ exports.control = asyncHandler(async (req,res) => {
         {
             game.teamPoints = game.teamPoints + question.questionPoints;
             game.answered[question.level - 1][question.questionNo - 1] = 1;
-            console.log(game);
             await game.save();
+            console.log(game);
 
             var flag = true;
             for(let i = 0; i < game.answered[game.level - 1].length; i++)
