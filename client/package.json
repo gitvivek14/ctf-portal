@@ -7,7 +7,7 @@
     "start": "react-dotenv && react-scripts start", 
     "serve": "react-dotenv && serve build", 
     "dev": "vite",
-    "build": " react-dotenv &&  vite build",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
