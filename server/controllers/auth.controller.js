@@ -38,6 +38,7 @@ exports.login_post = asyncHandler(async (req, res) => {
         // passeord ?null
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
