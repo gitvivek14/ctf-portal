@@ -21,17 +21,15 @@ const store = configureStore({
   reducer:persistedReducer
 });
 const persistor = persistStore(store);
-
-
 ReactDOM.createRoot(document.getElementById('root')).render(
 
     <Provider store={store}>
+      <BrowserRouter>
     <PersistGate  loading={null} persistor={persistor}>
-    <BrowserRouter>
     <App />
     <Toaster></Toaster>
-    </BrowserRouter>
     </PersistGate>
+    </BrowserRouter>
     </Provider>
     
  
