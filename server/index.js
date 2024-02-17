@@ -34,7 +34,7 @@ app.get("/",(req,res)=>{
 
 const server = http.createServer(app);
 const io = socketIo(server);
-const re=RegEx("*");
+
 app.use((_req,res,next)=>{
   res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -42,33 +42,11 @@ app.use((_req,res,next)=>{
   next();
 })
 app.use(cors({
-  origin: 'https://'+re+'.ngrok-free.app' // Allow requests from this origin
+  origin: 'https://043d-112-196-126-3.ngrok-free.app' // Allow requests from this origin
 }));
 
 //socket connection
-io.on('connection', (socket) => {
-  console.log('A user connected');
 
-  // Example: Emit a welcome message to the client upon connection
-  socket.emit('message', 'Welcome to the server!');
-
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-});
-
-app.get('/api/players', async (req, res) => {
-  try {
-    const players = await GAME.find({}, { teamName: 1, teamPoints: 1 }).sort({ teamPoints: -1 });
-
-
-    res.json(player);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server Error' });
-  }
-});
 
 //Routes
 const auth = require('./routes/auth');
@@ -77,6 +55,6 @@ const game = require('./routes/game');
 app.use('/game',game)
 app.use("/userd",userroutes)
 
-server.listen(port, () => {
+app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   })
