@@ -12,7 +12,7 @@ export function signup(teamname,email,password,confirmpwd,navigate){
         dispatch(setLoading(true))
         try {
             const response = await apiconnector("POST",
-            "http://localhost:3000/auth/signup",
+            "https://ctf-portal-c.vercel.app/auth/signup",
             {
                 teamname,
                 email,
@@ -42,7 +42,7 @@ export function login(email,password,navigate){
         dispatch(setLoading(true))
         try {
             const response = await apiconnector("POST",
-            "http://localhost:3000/auth/login",
+            "https://ctf-portal-c.vercel.app/auth/login",
             {
                 email,
                 password
@@ -53,7 +53,7 @@ export function login(email,password,navigate){
         }
         toast.success("Login Succesfull")
         try {
-            const gresp = await apiconnector("POST","http://localhost:3000/userd/user",{
+            const gresp = await apiconnector("POST","https://ctf-portal-c.vercel.app/userd/user",{
                 email
             })
             console.log("printing gresp",gresp);

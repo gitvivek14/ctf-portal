@@ -22,7 +22,15 @@ const Level = () => {
     setOpen(!open)
     setdata(data1)
   }
+  const {level} = useSelector((state)=>state.game)
   const {id} = useParams()
+  if(level!=id){
+    return(
+      <div className='w-full flex items-center justify-center text-white' style={{fontFamily:"Hack"}}>
+        Not Accessible
+      </div>
+    );
+  }
   useEffect(() => {
     dispatch(getQuestions(id));
   }, [id])

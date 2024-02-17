@@ -1,14 +1,15 @@
 import React from 'react'
 import Particle from '@/components/Particle'
-import { HackerEffectText } from "@nekzus/react-hacker-effect"
-import { HackText } from "react-hacker-text-effect";
+import { TypeAnimation } from 'react-type-animation';
 import Form from '../components/Form';
 import Navbar from '@/components/Navbar';
 import Button from '@/components/Button';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Auth = () => {
+    const navigate = useNavigate();
     return (
         <div className='w-full h-full mx-auto'>
             <Navbar></Navbar>
@@ -16,10 +17,23 @@ const Auth = () => {
                 <Particle></Particle>
             </div>
             <div className='z-10 flex flex-col items-start justify-start mt-9 p-4 '>
-                <HackText word='Capture the Flag' />
+                <TypeAnimation
+                sequence={[
+                    'Capture the Flag',
+                    1000,
+                    'Reckon'
+                ]}
+                wrapper="span"
+        speed={50}
+        style={{ fontSize: '2em', display: 'inline-block', color:"red",fontFamily:"Hack" }}
+        repeat={Infinity}
+                
+                >
+
+                </TypeAnimation>
             </div>
             <div className='flex flex-col items-center justify-start max-w-[40%] p-5'>
-                <div>
+                {/* <div>
                     <p className='text-white' style={{ fontFamily: "Hack" }}>
                         Lorem ipsum dolor sit amet
                         consectetur adipisicing elit.
@@ -28,7 +42,7 @@ const Auth = () => {
                         cupiditate delectus hic, exercitationem soluta.
                     </p>
 
-                </div>
+                </div> */}
             </div>
             <div className='flex flex-row items-center justify-start p-4 max-w-[40%]'>
                 <div className=''>
@@ -39,7 +53,7 @@ const Auth = () => {
              border-green-400 border-b-4 font-medium 
              overflow-hidden relative px-4 py-2 
              rounded-md hover:brightness-150 hover:border-t-4 
-             hover:border-b active:opacity-75 outline-none duration-300 group">
+             hover:border-b active:opacity-75 outline-none duration-300 group" onClick={()=>navigate('/login')}>
                         <span class="bg-green-400 shadow-green-400 absolute 
                         -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md 
                         opacity-50 group-hover:top-[150%] duration-500
