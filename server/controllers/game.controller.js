@@ -39,6 +39,7 @@ exports.getQuestions = asyncHandler(async(req,res)=>{
         message:"no questions for this level"
       })
     }
+    console.log(data);
     return res.status(200).json({
       message:"questions fetched succesfully",
       data
@@ -85,6 +86,7 @@ exports.control = asyncHandler(async (req, res) => {
     } else if (ans === question.answer && game2.answered[question.level - 1][question.questionNo - 1] == false) {
       game2.teamPoints = game2.teamPoints + question.questionPoints;
       game2.answered[question.level - 1][question.questionNo - 1] = true;
+      game2.flag++;
       console.log(game2);
       await game2.save();
 
@@ -103,12 +105,13 @@ exports.control = asyncHandler(async (req, res) => {
         answered:game2.answered
       },{now:true})
 
-      console.log(updated);
       const data = {
         teamPoints : updated.teamPoints,
         questionNo : updated.questionNo,
-        level : updated.level
+        level : updated.level,
+        flag : updated.flag
       }
+      console.log(data);
       
       return res.status(200).json({
         message: "Game Updated",
