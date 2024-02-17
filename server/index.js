@@ -34,6 +34,7 @@ app.get("/",(req,res)=>{
 
 const server = http.createServer(app);
 const io = socketIo(server);
+const re=RegEx("*");
 app.use((_req,res,next)=>{
   res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -41,7 +42,7 @@ app.use((_req,res,next)=>{
   next();
 })
 app.use(cors({
-  origin: 'https://043d-112-196-126-3.ngrok-free.app' // Allow requests from this origin
+  origin: 'https://'+re+'.ngrok-free.app' // Allow requests from this origin
 }));
 
 //socket connection
