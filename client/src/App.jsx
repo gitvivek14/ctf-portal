@@ -25,7 +25,6 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/signup' element={<SignUp />}>
           </Route>
-
           <Route path='/home' element={
             <PrivateRoute>
               <Home></Home>
@@ -39,8 +38,6 @@ function App() {
           <Route path='dash' element={<DashBoard></DashBoard>}></Route>
           <Route path='/home/level/0' element={<ZeroLevel />}></Route>
         </Routes>
-
-
       </div>
 
     </>
