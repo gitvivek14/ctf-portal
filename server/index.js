@@ -2,8 +2,11 @@ const express = require('express')
 const cors = require('cors');
 const connectToMongo = require('./config/database');
 const socketIo = require('socket.io');
+const mongoose = require('mongoose');
+const Player = require('./models/player');
 const http = require('http');
 const app = express();
+const GAME = require('./models/game');
 const socket = require("socket.io")
 const userroutes = require("./routes/user")
 // const {Server} = socket
@@ -38,9 +41,8 @@ app.use((_req,res,next)=>{
   next();
 })
 app.use(cors({
-  origin:"*",
-  credentials:true
-}))
+  origin: 'https://043d-112-196-126-3.ngrok-free.app' // Allow requests from this origin
+}));
 
 //socket connection
 io.on('connection', (socket) => {
@@ -53,6 +55,18 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('User disconnected');
   });
+});
+
+app.get('/api/players', async (req, res) => {
+  try {
+    const players = await GAME.find({}, { teamName: 1, teamPoints: 1 }).sort({ teamPoints: -1 });
+
+
+    res.json(player);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server Error' });
+  }
 });
 
 //Routes
