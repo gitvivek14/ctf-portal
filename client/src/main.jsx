@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast'
 import { Provider } from 'react-redux'
 import {configureStore} from "@reduxjs/toolkit"
 import rootReducer from './reducer/index.js'
-import persistConfig from "../src/config/persistConfig.js"
+import persistConfig from "./config/persistConfig.js"
 // import persistReducer from 'redux-persist/es/persistReducer'
 import { PersistGate } from 'redux-persist/integration/react'
 import {persistReducer,persistStore} from "redux-persist"
@@ -26,7 +26,7 @@ const persistor = persistStore(store);
 ReactDOM.createRoot(document.getElementById('root')).render(
 
     <Provider store={store}>
-      <PersistGate  loading={null} persistor={persistor}>
+    <PersistGate  loading={null} persistor={persistor}>
     <BrowserRouter>
     <App />
     <Toaster></Toaster>
