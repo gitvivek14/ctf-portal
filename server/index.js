@@ -41,7 +41,7 @@ app.use(cors({
   origin:"*",
   credentials:true
 }))
-
+//lmao
 //socket connection
 io.on('connection', (socket) => {
   console.log('A user connected');
