@@ -23,7 +23,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      input: 'src/main.js' // Adjust this path as per your project structure
+      input: 'src/main.jsx' // Adjust this path as per your project structure
     },
   },
   resolve: {
