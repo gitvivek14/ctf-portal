@@ -7,6 +7,7 @@ import Home from "../src/pages/Home"
 import Level from './pages/levels/Level'
 import {io} from "socket.io-client"
 import DashBoard from './pages/Dashboard/DashBoard'
+import ZeroLevel from './pages/levels/ZeroLevel'
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
   // })
   return (
     <>
-    <div className="w-[100vw] h-[100vh] min-h-screen bg-[#000814] overflow-y-auto ">
+    <div className="w-[100vw] h-[100vh] min-h-screen bg-[#000814] overflow-y-auto bghome ">
       <Routes>
         <Route path='/' element={<Auth></Auth>}>
         </Route>
@@ -26,6 +27,7 @@ function App() {
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='level/:id' element={<Level></Level>}></Route>
         <Route path='dash' element={<DashBoard></DashBoard>}></Route>
+        <Route path='/home/level/0' element={<ZeroLevel/>}></Route>
       </Routes>
       
 

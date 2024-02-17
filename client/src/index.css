@@ -86,3 +86,8 @@
    url("./fonts/Hack/Hack-Regular.ttf") format(".woff");
   font-weight: bold;
  }
+ .bghome{
+  background-image: url("../src/assets/card/bg--world.png");
+  background-size: cover;
+
+   }

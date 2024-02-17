@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 const persistedState = localStorage.getItem("reduxgameState")
   ? JSON.parse(localStorage.getItem("reduxgameState"))
   : {
-      user: "",
+      teamname: "",
       score: "",
       flagsCaptured: "",
       level: "",
@@ -40,6 +40,9 @@ const gameSlice = createSlice({
         },
         setquestions(state,value){
             state.questions = value.payload;
+        },
+        setteamName(state,value){
+            state.teamname= value.payload;
         }
     }
 })
@@ -60,5 +63,5 @@ const saveState = (state) => {
 //     saveState(gameSlice.getState());
 //   });
 
-export const{setFlags,setLevel,setScore,setEmail,setquestionNo,setLoading,setquestions} = gameSlice.actions
+export const{setFlags,setLevel,setScore,setEmail,setquestionNo,setLoading,setquestions,setteamName} = gameSlice.actions
 export default gameSlice.reducer

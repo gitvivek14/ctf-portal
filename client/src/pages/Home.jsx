@@ -8,13 +8,21 @@ import { FcLock } from "react-icons/fc";
 import { FcUnlock } from "react-icons/fc";
 import { FaLock , FaUnlock } from "react-icons/fa";
 import { useDispatch,useSelector } from 'react-redux';
+import game from "../assets/card/404.gif"
+import game1 from "../assets/card/bg.png"
+import jack from "../assets/card/jack.jpg"
+import lady from "../assets/card/lady.jpg"
+import laptop from "../assets/card/laptop.jpg"
 
 
 const Home = () => {
   const dispatch = useDispatch();
   const {questionNo,level} =useSelector((state)=> state.game)
-  console.log("printing",level);
+  // console.log("printing",level);
   const [Locked, setLocked] = useState(true)
+  const [Locked1, setLocked1] = useState(true)
+  const [Locked2, setLocked2] = useState(true)
+  const [Locked3, setLocked3] = useState(true)
   const [open, setOpen] = useState(false)
   const [formData, setFormData] = useState({
     answer:""
@@ -34,6 +42,9 @@ const Home = () => {
       answer:''
     })
 }
+useEffect(() => {
+}, [level])
+
   return (
     <>
     <div className='w-[100vw] h-[100vh] mx-auto text-white  flex flex-row 
@@ -52,14 +63,14 @@ const Home = () => {
                     </div>
                     <div className='-top-3'>
                       <p className='text-4xl' style={{ fontFamily: "Hack" }}>{
-                        `0${level}`
+                        `00`
                       }</p>
                     </div>
                   </div>
 
                   <div className='mt-10'>
                     <h1 className='text-black text-3xl align-top' style={{ fontFamily: "Hack" }}>
-                      Lorem Ipsum Begins
+                      The Reckon Begins
                     </h1>
                     <span style={{ fontFamily: "Hack" }}>
                       UNLOCKED///
@@ -69,7 +80,7 @@ const Home = () => {
                   <div className='mt-11'>
                     <Button
                       color="danger"
-                      onClick={()=>navigate('level/1')}
+                      onClick={()=>navigate('level/0')}
                       variant="solid"
                       size='lg'
                       style={{ fontFamily: "Hack" }} 
@@ -89,7 +100,8 @@ const Home = () => {
           <div className='w-full h-full'>
             <Card className='w-80 shadow-md h-80'>
               <CardCover className='bg-blue-900'>
-                {/* <img src={img}></img> */}
+                {/* <img src={game} className='object-cover'></img> */}
+                <img src={jack}></img>
               </CardCover>
               <CardContent>
                <div className='w-full h-full flex flex-col items-start justify-center relative'>
@@ -101,24 +113,24 @@ const Home = () => {
                 </div>
                 <div>
                   <p className='text-white'>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. P
+                    {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. P
                     ariatur facilis in minima iste harum laudantium fugit unde 
                     explicabo doloribus, atque qui provident natus voluptatibus 
-                    libero sapiente soluta, aperiam ex id.
+                    libero sapiente soluta, aperiam ex id. */}
 
                   </p>
                 </div>
                {
-                !Locked && (
+                level==1 && (
                   <div className='mt-6' >
                   <Button
                   color='danger'
                   variant='solid'
                   size='lg'
                   style={{fontFamily:"Hack"}}
+                  onClick={()=> navigate('/level/1')}
                   >
                     Play
-                    
                   </Button>
                 </div>
                 )
@@ -126,7 +138,7 @@ const Home = () => {
                 <div className='absolute text-white top-0 right-0 h-full'>
                  <div className='text-2xl' >
                  {
-                  Locked ? (<FaLock/>) : (<FaUnlock/>)
+                  level!=1 ? (<FaLock/>) : (<FaUnlock/>)
                  }
                  </div>
 
@@ -138,33 +150,34 @@ const Home = () => {
           <div>
           <Card className='w-80 shadow-md h-80'>
               <CardCover className='bg-blue-900'>
-                {/* <img src={img}></img> */}
+                <img src={laptop}></img>
               </CardCover>
               <CardContent>
                <div className='w-full h-full flex flex-col items-start justify-center relative'>
                 <div className='text-white'>
                   <h1 className='text-white'>LEVEL</h1>
                   <span className='text-3xl' style={{fontFamily:"Hack"}}>
-                    01
+                    02
                   </span>
                 </div>
                 <div>
                   <p className='text-white'>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. P
+                    {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. P
                     ariatur facilis in minima iste harum laudantium fugit unde 
                     explicabo doloribus, atque qui provident natus voluptatibus 
-                    libero sapiente soluta, aperiam ex id.
+                    libero sapiente soluta, aperiam ex id. */}
 
                   </p>
                 </div>
                {
-                !Locked && (
+                level==2 && (
                   <div className='mt-6' >
                   <Button
                   color='danger'
                   variant='solid'
                   size='lg'
                   style={{fontFamily:"Hack"}}
+                  onClick={()=> navigate('/level/2')}
                   >
                     Play
                     
@@ -175,7 +188,7 @@ const Home = () => {
                 <div className='absolute text-white top-0 right-0 h-full'>
                  <div className='text-2xl' >
                  {
-                  Locked ? (<FaLock/>) : (<FaUnlock/>)
+                  level!=2 ? (<FaLock/>) : (<FaUnlock/>)
                  }
                  </div>
 
@@ -196,7 +209,7 @@ const Home = () => {
                 <div className='text-white'>
                   <h1 className='text-white'>LEVEL</h1>
                   <span className='text-3xl' style={{fontFamily:"Hack"}}>
-                    01
+                    03
                   </span>
                 </div>
                 <div>
@@ -209,13 +222,14 @@ const Home = () => {
                   </p>
                 </div>
                {
-                !Locked && (
+                level==3 && (
                   <div className='mt-6' >
                   <Button
                   color='danger'
                   variant='solid'
                   size='lg'
                   style={{fontFamily:"Hack"}}
+                  onClick={()=> navigate('/level/3')}
                   >
                     Play
                     
@@ -226,10 +240,9 @@ const Home = () => {
                 <div className='absolute text-white top-0 right-0 h-full'>
                  <div className='text-2xl' >
                  {
-                  Locked ? (<FaLock/>) : (<FaUnlock/>)
+                 level!=3 ? (<FaLock/>) : (<FaUnlock/>)
                  }
                  </div>
-
                 </div>
                </div>
               </CardContent>
@@ -245,7 +258,7 @@ const Home = () => {
                 <div className='text-white'>
                   <h1 className='text-white'>LEVEL</h1>
                   <span className='text-3xl' style={{fontFamily:"Hack"}}>
-                    01
+                    04
                   </span>
                 </div>
                 <div>
@@ -258,13 +271,14 @@ const Home = () => {
                   </p>
                 </div>
                {
-                !Locked && (
+                level==4 && (
                   <div className='mt-6' >
                   <Button
                   color='danger'
                   variant='solid'
                   size='lg'
                   style={{fontFamily:"Hack"}}
+                  onClick={()=> navigate('/level/4')}
                   >
                     Play
                     
@@ -275,7 +289,7 @@ const Home = () => {
                 <div className='absolute text-white top-0 right-0 h-full'>
                  <div className='text-2xl' >
                  {
-                  Locked ? (<FaLock/>) : (<FaUnlock/>)
+                  level!=4 ? (<FaLock/>) : (<FaUnlock/>)
                  }
                  </div>
 

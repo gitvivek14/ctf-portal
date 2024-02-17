@@ -4,7 +4,7 @@ import { apiconnector } from "../apiconnector"
 
 import {setLoading,setSignUpData,setToken} from "../../slices/authSlice"
 import {setUser} from "../../slices/profileSlice"
-import {setEmail,setFlags,setLevel,setScore,setquestionNo} from "../../slices/gameSlice"
+import {setEmail,setFlags,setLevel,setScore,setquestionNo,setteamName} from "../../slices/gameSlice"
 
 export function signup(teamname,email,password,confirmpwd,navigate){
     return async (dispatch)=>{
@@ -25,6 +25,7 @@ export function signup(teamname,email,password,confirmpwd,navigate){
                 throw new Error(response.data.message)
             }
             toast.success("SignUp Successfull")
+            navigate('/login')
 
         } catch (error) {
             console.log(error,"frotnend");
@@ -46,7 +47,7 @@ export function login(email,password,navigate){
                 email,
                 password
             })
-        console.log(response);
+        console.log("login a",response);
         if(!response){
             throw new Error(response.data.message)
         }
@@ -55,14 +56,18 @@ export function login(email,password,navigate){
             const gresp = await apiconnector("POST","http://localhost:3000/userd/user",{
                 email
             })
-            console.log(gresp);
+            console.log("printing gresp",gresp);
             if(!gresp){
                 throw new Error(gresp.data.message)
             }
+            console.log(gresp.data);
             console.log(gresp.data.user.game.questionNo);
             dispatch(setquestionNo(gresp.data.user.game.questionNo))
             dispatch(setScore(gresp.data.user.teamPoints))
             dispatch(setLevel(gresp.data.user.game.level))
+            dispatch(setteamName(gresp.data.user.teamname))
+            dispatch(setFlags(gresp.data.user.game.flag))
+            navigate('/home')
         } catch (error) {
             console.log("api gresp error",error);
         }
@@ -75,6 +80,7 @@ export function login(email,password,navigate){
         navigate('/home')
         } catch (error) {
             console.log("login api error");
+            console.log(error);
             toast.error("Login Error");
         }
         finally{

@@ -5,6 +5,7 @@ import { IoMailSharp } from "react-icons/io5";
 import { Chart as ChartJS } from "chart.js/auto"
 import { Bar, Line } from "react-chartjs-2"
 import { BsPersonLinesFill } from "react-icons/bs";
+import { useSelector } from 'react-redux';
 
 const data = [
     {
@@ -21,6 +22,8 @@ const data = [
     },
 ]
 const DashBoard = () => {
+    const {level,teamname,score,flagsCaptured,email} = useSelector((state)=>state.game)
+ 
     return (
         <div className='w-full h-screen flex flex-col items-start justify-between max-w-max mx-auto'>
             {/* photo & notifications */}
@@ -31,7 +34,9 @@ const DashBoard = () => {
                  shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] bg-opacity-30 backdrop-blur-lg hover:scale-110 z-10'>
                     <div className='w-full flex flex-col items-start justify-center mx-auto p-4'>
                         <div className='p-4'>
-                            <h1 className='text-2xl text-white' style={{fontFamily:"Hack"}}>Welcome Admin</h1>
+                            <h1 className='text-2xl text-white' style={{fontFamily:"Hack"}}>{
+                                `Welcome  ${email}`
+                            }</h1>
                         </div>
                         <div className='w-full mx-auto'>
                             <div className='p-4'>
@@ -45,7 +50,7 @@ const DashBoard = () => {
                                         Team
                                     </div>
                                     <div>
-                                        Fall guys
+                                        {teamname}
                                     </div>
                                 </div>
                                 <div className='flex flex-col items-center justify-center p-1'>
@@ -53,11 +58,11 @@ const DashBoard = () => {
                                         Current Level
                                     </div>
                                     <div>
-                                        02
+                                        {`0${level}`}
                                     </div>
 
                                 </div>
-                                <div className='flex flex-col items-center justify-center'>
+                                {/* <div className='flex flex-col items-center justify-center'>
                                     <div>
                                         Hints
                                     </div>
@@ -65,13 +70,13 @@ const DashBoard = () => {
                                         12
                                     </div>
 
-                                </div>
+                                </div> */}
                                 <div className='flex flex-col items-center justify-center'>
                                     <div>
                                         Flags Captured
                                     </div>
                                     <div>
-                                        9
+                                        {flagsCaptured}
                                     </div>
 
                                 </div>
@@ -80,7 +85,7 @@ const DashBoard = () => {
                                         Score
                                     </div>
                                     <div>
-                                        210
+                                        {score}
                                     </div>
 
                                 </div>
@@ -90,7 +95,7 @@ const DashBoard = () => {
                     </div>
                 </div>
                 {/* notification */}
-                <div className=' w-full flex flex-col items-start justify-start
+                {/* <div className=' w-full flex flex-col items-start justify-start
                   h-[500px] bg-opacity-30 backdrop-blur-lg text-white border border-gray-500 bg-blue-600 
                  shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]'>
                     <div className='flex items-center justify-center p-4'>
@@ -166,7 +171,7 @@ const DashBoard = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             
             <div className='w-full flex items-start justify-between max-w-max mx-auto p-4 gap-6 '>
