@@ -42,7 +42,9 @@ app.use((_req,res,next)=>{
   next();
 })
 app.use(cors({
-  origin: 'https://043d-112-196-126-3.ngrok-free.app' // Allow requests from this origin
+  origin: '*',
+    credentials=true,
+    // Allow requests from this origin
 }));
 
 //socket connection
