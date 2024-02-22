@@ -32,8 +32,8 @@ app.get("/",(req,res)=>{
     })
   })
 
-const server = http.createServer(app);
-const io = socketIo(server);
+// const server = http.createServer(app);
+// const io = socketIo(server);
 
 app.use((_req,res,next)=>{
   res.header('Access-Control-Allow-Origin', '*');
